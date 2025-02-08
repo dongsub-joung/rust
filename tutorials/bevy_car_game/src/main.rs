@@ -35,6 +35,12 @@ fn main() {
     car1.translation= Vec2::new(300.0, 0.0);
     car1.collision= true;
 
+    let score= game.add_text("score", "Score: 0");
+    score.translation= Vec2::new(520.0, 320.0);
+
+    let high_score= game.add_text("high_score", "High_score");
+    high_score.translation= Vec2::new(-520.0, 320.0);
+
     game.add_logic(game_logic);
     game.run(GameState::default());
 }
@@ -48,7 +54,12 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState){
                 }
             }
             game_state.current_socre+= 1;
-            println!("Current Socre: {}", game_state.current_socre);
+            let score= engine.texts.get_mut("score").unwrap();
+            score.value= format!("Current Socre: {}", game_state.current_socre);
+
+            if game_state.current_socre> game_state.high_score {
+                game_state.high_score= game_state.current_socre;
+            }
         }
     }
 
