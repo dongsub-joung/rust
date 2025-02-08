@@ -53,6 +53,16 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState){
     let palyer= engine.sprites.get_mut("player").unwrap();
     const MOVEMENT_SPEED: f32= 100.0;
     if engine.keyboard_state.pressed_any(&[KeyCode::Up, KeyCode::W]) { 
-        palyer.translation.x+= 100.0 * engine.delta_f32;
+        palyer.translation.y+= 100.0 * engine.delta_f32;
+    }
+    if engine.keyboard_state.pressed_any(&[KeyCode::Down, KeyCode::S]) { 
+        palyer.translation.y -= 100.0 * engine.delta_f32;
+    }
+
+    if engine.keyboard_state.pressed_any(&[KeyCode::Right, KeyCode::D]) { 
+        palyer.translation.x += 100.0 * engine.delta_f32;
+    }
+    if engine.keyboard_state.pressed_any(&[KeyCode::Left, KeyCode::A]) { 
+        palyer.translation.x -= 100.0 * engine.delta_f32;
     }
 }
